@@ -16,15 +16,29 @@
 package org.springframework.data.mongodb.core;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.lang.Nullable;
 
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoDatabase;
 
 /**
+ * Callback interface for executing actions against a {@link MongoDatabase}.
  *
- * @param <T>
+ * @author Mark Pollak
+ * @author Graeme Rocher
+ * @author Thomas Risberg
+ * @author Oliver Gierke
+ * @author John Brisbin
+ * @author Christoph Strobl
  */
 public interface DbCallback<T> {
 
+	/**
+	 * @param db must not be {@literal null}.
+	 * @return can be {@literal null}.
+	 * @throws MongoException
+	 * @throws DataAccessException
+	 */
+	@Nullable
 	T doInDB(MongoDatabase db) throws MongoException, DataAccessException;
 }

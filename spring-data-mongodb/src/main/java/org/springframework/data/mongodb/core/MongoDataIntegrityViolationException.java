@@ -16,6 +16,7 @@
 package org.springframework.data.mongodb.core;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import com.mongodb.WriteResult;
@@ -39,8 +40,8 @@ public class MongoDataIntegrityViolationException extends DataIntegrityViolation
 	 * @param writeResult the {@link WriteResult} that causes the exception, must not be {@literal null}.
 	 * @param actionOperation the {@link MongoActionOperation} that caused the exception, must not be {@literal null}.
 	 */
-	public MongoDataIntegrityViolationException(String message, WriteResult writeResult,
-			MongoActionOperation actionOperation) {
+	public MongoDataIntegrityViolationException(@Nullable String message, WriteResult writeResult,
+												MongoActionOperation actionOperation) {
 
 		super(message);
 

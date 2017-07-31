@@ -31,6 +31,7 @@ import org.bson.types.ObjectId;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.mongodb.core.script.ExecutableMongoScript;
 import org.springframework.data.mongodb.core.script.NamedMongoScript;
+import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -93,7 +94,7 @@ class DefaultScriptOperations implements ScriptOperations {
 	 * @see org.springframework.data.mongodb.core.ScriptOperations#execute(org.springframework.data.mongodb.core.script.ExecutableMongoScript, java.lang.Object[])
 	 */
 	@Override
-	public Object execute(final ExecutableMongoScript script, final Object... args) {
+	public @Nullable Object execute(final ExecutableMongoScript script, final Object... args) {
 
 		Assert.notNull(script, "Script must not be null!");
 
@@ -116,7 +117,7 @@ class DefaultScriptOperations implements ScriptOperations {
 	 * @see org.springframework.data.mongodb.core.ScriptOperations#call(java.lang.String, java.lang.Object[])
 	 */
 	@Override
-	public Object call(final String scriptName, final Object... args) {
+	public @Nullable Object call(final String scriptName, final Object... args) {
 
 		Assert.hasText(scriptName, "ScriptName must not be null or empty!");
 

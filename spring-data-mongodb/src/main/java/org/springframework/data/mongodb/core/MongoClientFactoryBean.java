@@ -23,6 +23,7 @@ import java.util.List;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.PersistenceExceptionTranslator;
+import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -41,7 +42,7 @@ public class MongoClientFactoryBean extends AbstractFactoryBean<MongoClient> imp
 
 	private static final PersistenceExceptionTranslator DEFAULT_EXCEPTION_TRANSLATOR = new MongoExceptionTranslator();
 
-	private MongoClientOptions mongoClientOptions;
+	private @Nullable MongoClientOptions mongoClientOptions;
 	private String host;
 	private Integer port;
 	private List<ServerAddress> replicaSetSeeds;
@@ -54,7 +55,7 @@ public class MongoClientFactoryBean extends AbstractFactoryBean<MongoClient> imp
 	 * 
 	 * @param mongoClientOptions
 	 */
-	public void setMongoClientOptions(MongoClientOptions mongoClientOptions) {
+	public void setMongoClientOptions(@Nullable MongoClientOptions mongoClientOptions) {
 		this.mongoClientOptions = mongoClientOptions;
 	}
 
@@ -63,7 +64,7 @@ public class MongoClientFactoryBean extends AbstractFactoryBean<MongoClient> imp
 	 * 
 	 * @param credentials can be {@literal null}.
 	 */
-	public void setCredentials(MongoCredential[] credentials) {
+	public void setCredentials(@Nullable MongoCredential[] credentials) {
 		this.credentials = filterNonNullElementsAsList(credentials);
 	}
 
@@ -72,7 +73,7 @@ public class MongoClientFactoryBean extends AbstractFactoryBean<MongoClient> imp
 	 * 
 	 * @param replicaSetSeeds can be {@literal null}.
 	 */
-	public void setReplicaSetSeeds(ServerAddress[] replicaSetSeeds) {
+	public void setReplicaSetSeeds(@Nullable ServerAddress[] replicaSetSeeds) {
 		this.replicaSetSeeds = filterNonNullElementsAsList(replicaSetSeeds);
 	}
 
@@ -115,7 +116,7 @@ public class MongoClientFactoryBean extends AbstractFactoryBean<MongoClient> imp
 	 * (non-Javadoc)
 	 * @see org.springframework.dao.support.PersistenceExceptionTranslator#translateExceptionIfPossible(java.lang.RuntimeException)
 	 */
-	public DataAccessException translateExceptionIfPossible(RuntimeException ex) {
+	public @Nullable DataAccessException translateExceptionIfPossible(RuntimeException ex) {
 		return exceptionTranslator.translateExceptionIfPossible(ex);
 	}
 
@@ -169,7 +170,7 @@ public class MongoClientFactoryBean extends AbstractFactoryBean<MongoClient> imp
 	 * @param elements the elements to filter <T>, can be {@literal null}.
 	 * @return a new unmodifiable {@link List#} from the given elements without {@literal null}s.
 	 */
-	private static <T> List<T> filterNonNullElementsAsList(T[] elements) {
+	private static <T> List<T> filterNonNullElementsAsList(@Nullable T[] elements) {
 
 		if (elements == null) {
 			return Collections.emptyList();

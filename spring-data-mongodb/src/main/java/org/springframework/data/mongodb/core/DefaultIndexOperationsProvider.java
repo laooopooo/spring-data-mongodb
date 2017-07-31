@@ -25,6 +25,7 @@ import org.springframework.data.mongodb.core.index.IndexOperationsProvider;
  * me
  *
  * @author Mark Paluch
+ * @author Christoph Strobl
  * @since 2.0
  */
 class DefaultIndexOperationsProvider implements IndexOperationsProvider {
@@ -34,12 +35,15 @@ class DefaultIndexOperationsProvider implements IndexOperationsProvider {
 
 	/**
 	 * @param mongoDbFactory must not be {@literal null}.
+	 * @param mapper must not be {@literal null}.
 	 */
 	DefaultIndexOperationsProvider(MongoDbFactory mongoDbFactory, QueryMapper mapper) {
-		this.mongoDbFactory = mongoDbFactory; this.mapper = mapper;
+		this.mongoDbFactory = mongoDbFactory;
+		this.mapper = mapper;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see org.springframework.data.mongodb.core.index.IndexOperationsProvider#reactiveIndexOps(java.lang.String)
 	 */
 	@Override

@@ -189,7 +189,7 @@ public class QueryMapper {
 
 		Document mappedFields = fieldsObject != null ? getMappedObject(fieldsObject, entity) : new Document();
 		mapMetaAttributes(mappedFields, entity, MetaMapping.FORCE);
-		return mappedFields.keySet().isEmpty() ? null : mappedFields;
+		return mappedFields;
 	}
 
 	public Document getMappedFields(Document fieldsObject, Optional<? extends MongoPersistentEntity<?>> entity) {

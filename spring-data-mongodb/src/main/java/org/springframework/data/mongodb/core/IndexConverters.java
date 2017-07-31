@@ -22,6 +22,7 @@ import org.bson.Document;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.core.index.IndexDefinition;
 import org.springframework.data.mongodb.core.index.IndexInfo;
+import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 
 import com.mongodb.client.model.Collation;
@@ -119,7 +120,7 @@ abstract class IndexConverters {
 		};
 	}
 
-	public static Collation fromDocument(Document source) {
+	public @Nullable static Collation fromDocument(@Nullable Document source) {
 
 		if (source == null) {
 			return null;
